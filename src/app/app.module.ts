@@ -28,6 +28,7 @@ import { FavouritesComponent } from './components/favourites/favourites.componen
 import { LoginComponent } from './components/login/login.component'
 import { RegisterComponent } from './components/register/register.component'
 import { BarComponent } from './components/bar/bar.component'
+import { ResetComponent } from './components/reset/reset.component'
 
 @NgModule({
   imports: [
@@ -58,7 +59,8 @@ import { BarComponent } from './components/bar/bar.component'
     FavouritesComponent,
     LoginComponent,
     RegisterComponent,
-    BarComponent
+    BarComponent,
+    ResetComponent
   ],
   bootstrap: [ 
     AppComponent

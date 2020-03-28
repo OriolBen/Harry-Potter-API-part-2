@@ -27,8 +27,7 @@ export class AuthenticationService {
   }
 
   signInGoogle() {
-    const provider = new auth.GoogleAuthProvider()
-    this.afAuth.auth.signInWithPopup(provider)
+    return this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider())
   }
 
   loginRegular(email: string, password: string) {
@@ -40,6 +39,24 @@ export class AuthenticationService {
   }
 
   logout() {
-    this.afAuth.auth.signOut().then((res) => this.router.navigate([""]))
-  } 
+    return this.afAuth.auth.signOut().then((res) => this.router.navigate([""]))
+  }
+
+  resetPasswordEmail(email: string) { 
+    return this.afAuth.auth.sendPasswordResetEmail(email).then(() => alert('A password reset link has been sent to your email address'), (rejectionReason) => alert(rejectionReason)).catch(e => alert('An error occurred while attempting to reset your password')).then((res) => this.router.navigate([""]))
+  }
+
+  checkOobCode(oobCode : string) {
+    return this.afAuth.auth.verifyPasswordResetCode(oobCode).catch(e => {
+      alert(e)
+      this.router.navigate([""])
+    })
+  }
+
+  resetPassword(oobCode : string, password : string) {
+    return this.afAuth.auth.confirmPasswordReset(oobCode, password).then(resp => {
+      alert('New password has been saved')
+      this.router.navigate(["/login"])
+    }).catch(e => alert(e))
+  }
 }

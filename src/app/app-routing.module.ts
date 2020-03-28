@@ -9,6 +9,7 @@ import { SpellsComponent } from './components/spells/spells.component'
 import { FavouritesComponent } from './components/favourites/favourites.component'
 import { LoginComponent } from './components/login/login.component'
 import { RegisterComponent } from './components/register/register.component'
+import { ResetComponent } from './components/reset/reset.component'
 
 const routes: Routes = [
   {
@@ -46,6 +47,10 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent
+  },
+  {
+    path: 'reset',
+    component: ResetComponent
   }
 ]
 
