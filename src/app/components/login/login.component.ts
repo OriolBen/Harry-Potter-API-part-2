@@ -15,6 +15,6 @@ export class LoginComponent {
   constructor(private authService : AuthenticationService, private router : Router) {}
 
   login() {
-    this.authService.loginRegular(this.email, this.password).then((res) => this.router.navigate(['/'])).catch((err) => alert(err))
+    this.authService.loginRegular(this.email, this.password).then((res) => this.router.navigate(["/"])).catch((err) => alert(err))
   }
 }

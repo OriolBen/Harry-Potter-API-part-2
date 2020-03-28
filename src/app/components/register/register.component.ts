@@ -14,8 +14,8 @@ export class RegisterComponent  {
 
   constructor(private authService : AuthenticationService, private router : Router) {}
 
-  public register() {
-    this.authService.signInRegular(this.email, this.password).then((res) => this.router.navigate(['/'])).catch((err) => { 
+  register() {
+    this.authService.signInRegular(this.email, this.password).then((res) => this.router.navigate(["/"])).catch((err) => { 
       alert("Error: " + err)
       this.password = ""
     }) 

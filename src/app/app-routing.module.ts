@@ -10,6 +10,7 @@ import { FavouritesComponent } from './components/favourites/favourites.componen
 import { LoginComponent } from './components/login/login.component'
 import { RegisterComponent } from './components/register/register.component'
 import { ResetComponent } from './components/reset/reset.component'
+import { AccountComponent } from './components/account/account.component'
 
 const routes: Routes = [
   {
@@ -51,6 +52,10 @@ const routes: Routes = [
   {
     path: 'reset',
     component: ResetComponent
+  },
+  {
+    path: 'account',
+    component: AccountComponent
   }
 ]
 
