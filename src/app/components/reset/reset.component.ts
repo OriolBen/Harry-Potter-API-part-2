@@ -11,7 +11,7 @@ import { AuthenticationService } from '../../services/authentication.service'
 export class ResetComponent implements OnInit {
   email : string = ""
   password : string = ""
-  mode : string = "normal"
+  mode : string = ""
   oobCode : string = ""
 
   constructor(private authService : AuthenticationService, private route : ActivatedRoute, private router : Router) {}

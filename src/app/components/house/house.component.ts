@@ -17,10 +17,10 @@ export class HouseComponent implements OnInit {
   exists : boolean
   characters : object = {}
 
-  constructor(private api : ApiService, private storage : DataService, private router : ActivatedRoute, private authService : AuthenticationService) {}
+  constructor(private api : ApiService, private storage : DataService, private route : ActivatedRoute, private authService : AuthenticationService) {}
 
   ngOnInit() {
-    this.router.params.subscribe(res => this.id = res.id)
+    this.route.params.subscribe(res => this.id = res.id)
     this.local = this.storage.getHouse()
     this.getHouse()
   }
