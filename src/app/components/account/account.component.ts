@@ -10,6 +10,7 @@ import { AuthenticationService } from '../../services/authentication.service'
 
 export class AccountComponent implements OnInit {
   password : string = ""
+  verified : boolean = false
   mode : string = ""
   oobCode : string = ""
 
@@ -20,11 +21,20 @@ export class AccountComponent implements OnInit {
       this.mode = params['mode']
       this.oobCode = params['oobCode']
     })
-    if (this.mode === undefined) this.mode = "normal"
-    else if (this.mode == "resetPassword") this.authService.checkOobCode(this.oobCode)
-    else {
-      alert("URL is not valid")
-      this.router.navigate([""])
+    switch (this.mode) {
+      case undefined:
+        this.mode = "normal"
+        break
+      case "resetPassword":
+        this.authService.checkOobCode(this.mode, this.oobCode)
+        break
+      case "verifyEmail":
+        setTimeout(() => { this.authService.checkOobCode(this.mode, this.oobCode) }, 2500)
+        break
+      default:
+        alert("URL is not valid")
+        this.router.navigate([""])
+        break
     }
   }
 }

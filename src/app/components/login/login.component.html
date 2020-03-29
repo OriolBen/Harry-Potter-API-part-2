@@ -1,6 +1,6 @@
 <div>
 	<h2>Login</h2>
-	<form (ngSubmit)="login()">
+	<form (ngSubmit)="authService.loginRegular(email, password)">
     <p><input type="text" placeholder="Email" name="email" [(ngModel)]="email" required></p>
 		<p><input type="password" placeholder="Password" name="password" [(ngModel)]="password" required><a routerLink="/reset">Forgot password?</a></p>
 		<p><button>Login</button></p>

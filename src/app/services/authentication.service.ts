@@ -16,22 +16,31 @@ export class AuthenticationService {
       if (user) {
         this.userDetails = user
         this.displayName = (this.userDetails.displayName) ? this.userDetails.displayName : this.userDetails.email
-        this.router.navigate(['/']) 
       } 
       else this.userDetails = null
     }) 
   }
 
-  signInRegular(email: string, password: string) {
-    return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
+  signInGoogle() {
+    return this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider()).then((result) => this.router.navigate([""])).catch((e) => alert(e.message))
   }
 
-  signInGoogle() {
-    return this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider())
+  signInRegular(email: string, password: string) {
+    return this.afAuth.auth.createUserWithEmailAndPassword(email, password).then((result) => {
+      this.afAuth.auth.currentUser.sendEmailVerification()
+      alert("Please validate your email address")
+      this.router.navigate([""])
+    }).catch((e) => alert(e.message))
   }
 
   loginRegular(email: string, password: string) {
-    return this.afAuth.auth.signInWithEmailAndPassword(email, password) 
+    return this.afAuth.auth.signInWithEmailAndPassword(email, password).then((result) => {
+      if (result.user.emailVerified !== true) {
+        this.afAuth.auth.currentUser.sendEmailVerification()
+        alert("Please validate your email address")
+      } 
+      this.router.navigate([""])
+    }).catch((e) => alert(e.message))
   }
 
   isLoggedIn() : boolean {
@@ -43,20 +52,31 @@ export class AuthenticationService {
   }
 
   resetPasswordEmail(email: string) { 
-    return this.afAuth.auth.sendPasswordResetEmail(email).then(() => alert('A password reset link has been sent to your email address'), (rejectionReason) => alert(rejectionReason)).catch(e => alert('An error occurred while attempting to reset your password')).then((res) => this.router.navigate([""]))
+    return this.afAuth.auth.sendPasswordResetEmail(email).then((res) => alert('A password reset link has been sent to your email address'), (rejectionReason) => alert(rejectionReason)).catch(e => alert('An error occurred while attempting to reset your password')).then((res) => this.router.navigate([""]))
   }
 
-  checkOobCode(oobCode : string) {
-    return this.afAuth.auth.verifyPasswordResetCode(oobCode).catch(e => {
-      alert(e)
-      this.router.navigate([""])
-    })
+  checkOobCode(mode : string, oobCode : string) {
+    if (mode == "resetPassword") {
+      return this.afAuth.auth.verifyPasswordResetCode(oobCode).catch(e => {
+        alert(e.message)
+        this.router.navigate([""])
+      })
+    }
+    else if (mode == "verifyEmail") {
+      return this.afAuth.auth.applyActionCode(oobCode).then((res) => {
+        alert("Email has been verified")
+        this.router.navigate([""])
+      }).catch(e => {
+        alert(e.message)
+        this.router.navigate([""])
+      })
+    }
   }
 
   resetPassword(oobCode : string, password : string) {
-    return this.afAuth.auth.confirmPasswordReset(oobCode, password).then(resp => {
+    return this.afAuth.auth.confirmPasswordReset(oobCode, password).then((res) => {
       alert('New password has been saved')
       this.router.navigate(["/login"])
-    }).catch(e => alert(e))
+    }).catch(e => alert(e.message))
   }
 }
