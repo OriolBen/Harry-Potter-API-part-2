@@ -8,9 +8,9 @@ import { AuthenticationService } from '../../services/authentication.service'
 })
 
 export class BarComponent {
-  email : string = ""
+  message : string = ""
 
   constructor(private authService : AuthenticationService) {
-    setTimeout(() => { this.email = authService.userDetails.email }, 2500)
+    setTimeout(() => { if (authService.isLoggedIn()) this.message = "Welcome back, " + authService.userDetails.email }, 2500)
   }
 }

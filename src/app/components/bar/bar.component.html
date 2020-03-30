@@ -1,7 +1,6 @@
 <div>
   <a routerLink="">
     <img src="https://cdn.jsdelivr.net/gh/OriolBen/Harry-Potter-API@master/src/app/assets/hogwarts.png">
-    <img src="../../assets/hogwarts.png">
     <h1>Harry Potter API</h1>
   </a>
   <div *ngIf="!authService.isLoggedIn()">
@@ -9,7 +8,7 @@
     <button routerLink="/register">Register</button>
   </div>
   <div *ngIf="authService.isLoggedIn()">
-    <p>Welcome back, {{email}}</p>
+    <p>{{message}}</p>
     <button (click)="authService.logout()">Logout</button>
   </div>
 </div>
