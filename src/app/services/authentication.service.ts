@@ -38,7 +38,8 @@ export class AuthenticationService {
       if (result.user.emailVerified !== true) {
         this.afAuth.auth.currentUser.sendEmailVerification()
         alert("Successful login.\nPlease verify your email address.")
-      } 
+      }
+      else alert("Successful login.")
       this.router.navigate([""])
     }).catch((e) => alert(e.message))
   }
