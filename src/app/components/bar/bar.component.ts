@@ -8,5 +8,9 @@ import { AuthenticationService } from '../../services/authentication.service'
 })
 
 export class BarComponent {
-  constructor(private authService : AuthenticationService) {}
+  name : string = ""
+
+  constructor(private authService : AuthenticationService) {
+    setTimeout(() => { this.name = authService.displayName }, 2500)
+  }
 }

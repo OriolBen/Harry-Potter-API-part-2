@@ -28,7 +28,7 @@ export class AuthenticationService {
   signInRegular(email: string, password: string) {
     return this.afAuth.auth.createUserWithEmailAndPassword(email, password).then((result) => {
       this.afAuth.auth.currentUser.sendEmailVerification()
-      alert("Please verify your email address")
+      alert("Successful registration.\nPlease verify your email address.")
       this.router.navigate([""])
     }).catch((e) => alert(e.message))
   }
@@ -37,7 +37,7 @@ export class AuthenticationService {
     return this.afAuth.auth.signInWithEmailAndPassword(email, password).then((result) => {
       if (result.user.emailVerified !== true) {
         this.afAuth.auth.currentUser.sendEmailVerification()
-        alert("Please verify your email address")
+        alert("Successful login.\nPlease verify your email address.")
       } 
       this.router.navigate([""])
     }).catch((e) => alert(e.message))
