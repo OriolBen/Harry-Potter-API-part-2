@@ -9,7 +9,7 @@
   </div>
   <div *ngIf="authService.isLoggedIn()">
     <p>{{message}}</p>
-    <button (click)="authService.logout()">Logout</button>
+    <button *ngIf="show" (click)="authService.logout()">Logout</button>
   </div>
 </div>
 <hr>

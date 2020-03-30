@@ -9,8 +9,14 @@ import { AuthenticationService } from '../../services/authentication.service'
 
 export class BarComponent {
   message : string = ""
+  show : boolean = false
 
   constructor(private authService : AuthenticationService) {
-    setTimeout(() => { if (authService.isLoggedIn()) this.message = "Welcome back, " + authService.userDetails.email }, 2500)
+    setTimeout(() => {
+      if (authService.isLoggedIn()) {
+        this.message = "Welcome back, " + authService.userDetails.email
+        this.show = true
+      }
+    }, 2500)
   }
 }
