@@ -8,7 +8,7 @@
     <button routerLink="/register">Register</button>
   </div>
   <div *ngIf="authService.isLoggedIn()">
-    <p>Welcome back, {{name}}</p>
+    <p>Welcome back</p>
     <button (click)="authService.logout()">Logout</button>
   </div>
 </div>
